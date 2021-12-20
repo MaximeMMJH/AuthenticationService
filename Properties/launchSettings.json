@@ -22,10 +22,16 @@
       "launchBrowser": true,
       "launchUrl": "swagger",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "DB_HOST": "lcoalhost",
+        "RABBITMQ_HOST": "localhost",
+        "DB_PORT": "3306",
+        "DB_NAME": "Auth",
+        "DB_USERNAME": "user",
+        "DB_PASSWORD": "P4ssword"
       },
       "dotnetRunMessages": "true",
-      "applicationUrl": "https://localhost:5001;http://localhost:5000"
+      "applicationUrl": "https://localhost:5443;http://localhost:5014"
     },
     "Docker": {
       "commandName": "Docker",
