@@ -26,6 +26,13 @@ namespace AuthenticationService.Controllers
             _facade = facade;
         }
 
+        [HttpGet]
+        [Route("/auth/ping")]
+        public IActionResult Ping()
+        {
+            return Ok("Hello world!");
+        }
+
         [HttpPost]
         [Route("/auth/register")]
         [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
