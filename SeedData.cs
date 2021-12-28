@@ -44,10 +44,10 @@ namespace AuthenticationService
 
             using (var scope = serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
-                scope.ServiceProvider.GetService<PersistedGrantDbContext>().Database.Migrate();
+                scope.ServiceProvider.GetService<PersistedGrantDbContext>().Database.EnsureCreated();
 
                 var context = scope.ServiceProvider.GetService<ConfigurationDbContext>();
-                context.Database.Migrate();
+                context.Database.EnsureCreated();
 
                 EnsureSeedData(context);
                 EnsureUsers(scope);
@@ -176,6 +176,20 @@ namespace AuthenticationService
             else
             {
                 Console.WriteLine("ApiScopes already populated");
+            }
+
+            if (!context.ApiResources.Any())
+            {
+                Console.WriteLine("ApiResources being populated");
+                foreach (var resource in Config.ApiResources.ToList())
+                {
+                    context.ApiResources.Add(resource.ToEntity());
+                }
+                context.SaveChanges();
+            }
+            else
+            {
+                Console.WriteLine("ApiResources already populated");
             }
         }
     }

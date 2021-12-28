@@ -54,11 +54,14 @@ namespace AuthenticationService
                         ClientId = "js.client",
                         ClientName = "interactive client",
 
-                        AllowedGrantTypes = GrantTypes.Code,
+                        AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
+
+                        RedirectUris = { "http://localhost:8081" },
+                        AllowedCorsOrigins = { "http://localhost:8081" },
 
                         ClientSecrets = { new Secret("MGPASS".Sha256()) },
 
-                        AllowedScopes = { "mggateway.read", "mggateway.write" }
+                        AllowedScopes = { "api.read", "api.write" }
                     }
                 };
             }
@@ -66,15 +69,16 @@ namespace AuthenticationService
 
         public static IEnumerable<ApiScope> ApiScopes => new[]
         {
-            new ApiScope("mggateway.read"),
-            new ApiScope("mggateway.write")
+            new ApiScope("api.read"),
+            new ApiScope("api.write")
         };
 
         public static IEnumerable<ApiResource> ApiResources => new[]
         {
-            new ApiResource("mggateway")
+            new ApiResource()
             {
-                Scopes = new List<string> { "mggateway.read", "mggateway.write" },
+                Name = "api",
+                Scopes = new List<string> { "api.read", "api.write" },
                 ApiSecrets = new List<Secret> { new Secret("ScopeSecret".Sha256()) },
                 UserClaims = new List<string> { "role" }
             }

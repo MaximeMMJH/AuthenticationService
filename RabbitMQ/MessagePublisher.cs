@@ -25,7 +25,8 @@ namespace AuthenticationService.RabbitMQ
 
         private void InitRabbitMQ()
         {
-            var factory = new ConnectionFactory { HostName = "stable-rabbitmq.mg.svc", UserName = "user", Password = "wHa0QFbZlX" };
+            var factory = new ConnectionFactory { HostName = "stable-rabbitmq.mg.svc", UserName = "user", Password = "PrI1cTao1G" };
+            //var factory = new ConnectionFactory { HostName = "localhost" };
 
             _connection = factory.CreateConnection();
 

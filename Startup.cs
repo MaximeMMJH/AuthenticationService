@@ -35,6 +35,16 @@ namespace AuthenticationService
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(builder =>
+                {
+                    builder.WithOrigins("http://localhost:8081")
+                    .AllowAnyHeader()
+                    .AllowAnyMethod();
+                });
+            });
+
             var connectionString = Configuration.GetConnectionString("MySql");
             var migrationsAssembly = typeof(Startup).GetTypeInfo().Assembly.GetName().Name;
             var mySqlVersion = new MySqlServerVersion(new Version(8, 0, 23));
@@ -64,6 +74,14 @@ namespace AuthenticationService
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "AuthenticationService", Version = "v1" });
             });
 
+            services.AddAuthentication("Bearer")
+                .AddIdentityServerAuthentication("Bearer", options =>
+                {
+                    options.ApiName = "api";
+                    options.Authority = "http://localhost:5443";
+                    options.RequireHttpsMetadata = false;
+                });
+
             services.AddLogging();
             services.AddScoped<AuthenticationFacade>();
             services.AddScoped<MessagePublisher>();
@@ -84,6 +102,8 @@ namespace AuthenticationService
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors();
 
             app.UseAuthentication();
 

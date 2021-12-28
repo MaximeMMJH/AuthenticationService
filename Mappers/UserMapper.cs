@@ -9,9 +9,9 @@ namespace AuthenticationService.Mappers
 {
     public static class UserMapper
     {
-        public static UserDTO MapDBOToDTO(UserDBO user)
+        public static RegisterModel MapDBOToDTO(UserDBO user)
         {
-            return new UserDTO()
+            return new RegisterModel()
             {
                 Email = user.Email,
                 Username = user.Username,
@@ -19,7 +19,7 @@ namespace AuthenticationService.Mappers
             };
         }
 
-        public static UserDBO MapDTOToDBO(UserDTO user)
+        public static UserDBO MapDTOToDBO(RegisterModel user)
         {
             return new UserDBO()
             {

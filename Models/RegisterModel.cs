@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace AuthenticationService.Models
 {
-    public class UserDTO
+    public class RegisterModel
     {
         public string Email { get; set; }
         public string Password { get; set; }

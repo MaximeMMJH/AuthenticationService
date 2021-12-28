@@ -1,6 +1,9 @@
 ﻿using AuthenticationService.Mappers;
 using AuthenticationService.Models;
 using AuthenticationService.RabbitMQ;
+using IdentityServer4;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,11 +23,6 @@ namespace AuthenticationService.Logic
         public void Register(UserDBO user)
         {
             _publisher.PublishUserCreation(UserMapper.MapDBOToCreationDTO(user));
-        }
-
-        public void Login()
-        {
-
         }
     }
 }
