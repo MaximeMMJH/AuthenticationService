@@ -15,11 +15,13 @@ using System.Net.Mime;
 using System.Threading.Tasks;
 using System.Security.Claims;
 using IdentityModel;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AuthenticationService.Controllers
 {
     [ApiController]
     [Route("/auth")]
+    [Authorize(AuthenticationSchemes = "Bearer")]
     public class AuthenticationController : Controller
     {
         private readonly ILogger<AuthenticationController> logger;

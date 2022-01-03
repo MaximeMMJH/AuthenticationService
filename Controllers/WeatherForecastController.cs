@@ -10,6 +10,7 @@ namespace AuthenticationService.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [Authorize(AuthenticationSchemes = "Bearer")]
     public class WeatherForecastController : ControllerBase
     {
         private static readonly string[] Summaries = new[]
@@ -25,7 +26,6 @@ namespace AuthenticationService.Controllers
         }
 
         [HttpGet]
-        [Authorize(AuthenticationSchemes = "Bearer")]
         public IEnumerable<WeatherForecast> Get()
         {
             var rng = new Random();
