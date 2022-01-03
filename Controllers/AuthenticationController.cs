@@ -74,12 +74,30 @@ namespace AuthenticationService.Controllers
         [HttpPost]
         [Route("/auth/login")]
         [ProducesResponseType(typeof(IdentityUser), StatusCodes.Status200OK)]
-        public IActionResult Login([FromBody] LoginModel model)
+        public async Task<IActionResult> Login([FromBody] LoginModel model)
         {
             if (!ModelState.IsValid) return BadRequest(model);
 
-            //var user = _signInManager.UserManager.FindByNameAsync(model.UserName);
+            var user = await _signInManager.UserManager.FindByNameAsync(model.Username);
 
+            if (user == null)
+            {
+                return NotFound($"No user found for {model.Username}");
+            }
+
+            var result = await _signInManager.CheckPasswordSignInAsync(user, model.Password, false);
+
+            if (result == Microsoft.AspNetCore.Identity.SignInResult.Failed)
+            {
+                return BadRequest("incorrect password");
+            }
+
+            IdentityServerUser issuer = new IdentityServerUser(model.Username)
+            {
+                DisplayName = model.Username,
+            };
+
+            await HttpContext.SignInAsync(issuer);
 
             return Ok(model);
         }
