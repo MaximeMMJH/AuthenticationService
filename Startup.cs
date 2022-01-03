@@ -78,7 +78,7 @@ namespace AuthenticationService
                 .AddIdentityServerAuthentication("Bearer", options =>
                 {
                     options.ApiName = "api";
-                    options.Authority = "authentication-service";
+                    options.Authority = "http://20.50.160.54";
                     options.RequireHttpsMetadata = false;
                 });
 
