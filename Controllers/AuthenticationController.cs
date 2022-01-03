@@ -21,7 +21,6 @@ namespace AuthenticationService.Controllers
 {
     [ApiController]
     [Route("/auth")]
-    [Authorize(AuthenticationSchemes = "Bearer")]
     public class AuthenticationController : Controller
     {
         private readonly ILogger<AuthenticationController> logger;
@@ -41,6 +40,7 @@ namespace AuthenticationService.Controllers
 
         [HttpGet]
         [Route("/auth/ping")]
+        [Authorize(AuthenticationSchemes = "Bearer")]
         public IActionResult Ping()
         {
             return Ok("Hello world!");
