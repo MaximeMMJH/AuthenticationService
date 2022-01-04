@@ -20,9 +20,9 @@ namespace AuthenticationService.Logic
             _publisher = publisher;
         }
 
-        public void Register(UserDBO user)
+        public void Register(UserDBO user, Guid guid)
         {
-            _publisher.PublishUserCreation(UserMapper.MapDBOToCreationDTO(user));
+            _publisher.PublishUserCreation(UserMapper.MapDBOToCreationDTO(user, guid));
         }
     }
 }

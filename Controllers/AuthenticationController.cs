@@ -66,7 +66,9 @@ namespace AuthenticationService.Controllers
                 return Conflict(result.Errors.First().Description);
             }
 
-            _facade.Register(UserMapper.MapDTOToDBO(user));
+            var createdUser = await _userManager.FindByNameAsync(user.Username);
+
+            _facade.Register(UserMapper.MapDTOToDBO(user), Guid.Parse(createdUser.Id));
 
             return Ok(user);
         }

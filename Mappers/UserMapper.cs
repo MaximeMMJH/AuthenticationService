@@ -29,10 +29,11 @@ namespace AuthenticationService.Mappers
             };
         }
 
-        public static UserCreationDTO MapDBOToCreationDTO(UserDBO user)
+        public static UserCreationDTO MapDBOToCreationDTO(UserDBO user, Guid guid)
         {
             return new UserCreationDTO()
             {
+                subId = guid,
                 Email = user.Email,
                 Username = user.Username
             };
