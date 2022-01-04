@@ -55,6 +55,7 @@ namespace AuthenticationService
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddIdentityServer()
+                .AddDeveloperSigningCredential()
                 .AddAspNetIdentity<IdentityUser>()
                 .AddConfigurationStore(options =>
                 {
@@ -63,8 +64,7 @@ namespace AuthenticationService
                 .AddOperationalStore(options =>
                 {
                     options.ConfigureDbContext = builder => builder.UseMySql(connectionString, mySqlVersion, opt => opt.MigrationsAssembly(migrationsAssembly));
-                })
-                .AddDeveloperSigningCredential();
+                });
 
             SeedData.EnsureSeedData(connectionString);
 
