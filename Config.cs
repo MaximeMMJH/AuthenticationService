@@ -61,7 +61,7 @@ namespace AuthenticationService
 
                         ClientSecrets = { new Secret("MGPASS".Sha256()) },
 
-                        AllowedScopes = { "api.read", "api.write" }
+                        AllowedScopes = { "api.read", "api.write", "openid", "profile" }
                     }
                 };
             }
