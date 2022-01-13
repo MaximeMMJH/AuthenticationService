@@ -39,7 +39,7 @@ namespace AuthenticationService
             {
                 options.AddDefaultPolicy(builder =>
                 {
-                    builder.WithOrigins("http://localhost:8081")
+                    builder.WithOrigins("http://localhost:8081", "http://20.103.3.136")
                     .AllowAnyHeader()
                     .AllowAnyMethod();
                 });
