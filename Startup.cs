@@ -35,7 +35,7 @@ namespace AuthenticationService
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            /*
+            
             services.AddCors(options =>
             {
                 options.AddDefaultPolicy(builder =>
@@ -45,7 +45,6 @@ namespace AuthenticationService
                     .AllowAnyMethod();
                 });
             });
-            */
 
             var connectionString = Configuration.GetConnectionString("MySql");
             var migrationsAssembly = typeof(Startup).GetTypeInfo().Assembly.GetName().Name;
